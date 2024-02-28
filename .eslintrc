@@ -1,0 +1,16 @@
+{
+    "extends": "eslint:recommended",
+    "parser": "@babel/eslint-parser",
+    "rules": {
+      "semi": ["error", "always"],
+      "quotes": ["error", "double"]
+    },
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "ignorePatterns": ["test/", "jest.config.js"]
+  }

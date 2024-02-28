@@ -1,0 +1,22 @@
+{
+  "name": "lazycurl",
+  "version": "1.0.0",
+  "description": "Use curl, the easy way.",
+  "type": "module",
+  "main": "./src/index.js",
+  "scripts": {
+    "dev": "node ./src/index.js",
+    "lint": "eslint --ext .js, --ignore-path .gitignore ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/eslint-parser": "^7.23.10",
+    "inquirer": "^9.2.15"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.24.0",
+    "eslint": "^8.57.0"
+  }
+}
