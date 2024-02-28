@@ -1,10 +1,10 @@
 import inquirer from "inquirer";
 
-import UrlCommand from "./commands/url-command/index.js";
+import UrlCommand from "../commands/url-command/index.js";
 const urlCommand = new UrlCommand();
 
-import CurlBuilder from "./curl-builder.js";
-import CurlLauncher from "./curl-launcher.js";
+import CurlBuilder from "../infrastructure/services/curl-builder.js";
+import CurlLauncher from "../infrastructure/services/curl-launcher.js";
 
 async function menuBuild() {
     const {url} = await inquirer.prompt([
@@ -19,8 +19,8 @@ async function menuBuild() {
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand});
-    curlLauncher.launch()
+    curlLauncher.launch();
 }
 
 
-menuBuild();
+export default menuBuild;

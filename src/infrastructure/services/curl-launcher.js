@@ -1,4 +1,4 @@
-import { spawn } from 'child_process';
+import { spawn } from "child_process";
 
 class CurlLauncher {
     constructor({ curlCommand }) {
@@ -6,15 +6,15 @@ class CurlLauncher {
     }
 
     launch() {
-        this._curlProcess.stdout.on('data', data => {
+        this._curlProcess.stdout.on("data", data => {
             console.log(`stdout: ${data}`);
         });
 
-        this._curlProcess.stderr.on('data', data => {
+        this._curlProcess.stderr.on("data", data => {
             console.error(`stderr: ${data}`);
         });
 
-        this._curlProcess.on('close', code => {
+        this._curlProcess.on("close", code => {
             console.log(`child process exited with code ${code}`);
         });
     }

@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Use curl, the easy way.",
   "type": "module",
-  "main": "./src/index.js",
+  "bin": {
+    "lazycurl": "./bin/index.js"
+  },
+  "main": "./src/cli/index.js",
   "scripts": {
-    "dev": "node ./src/index.js",
+    "cli": "node ./src/cli/index.js",
     "lint": "eslint --ext .js, --ignore-path .gitignore ."
   },
   "keywords": [],
