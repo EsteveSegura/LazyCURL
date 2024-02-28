@@ -9,17 +9,19 @@
   "main": "./src/cli/index.js",
   "scripts": {
     "cli": "node ./src/cli/index.js",
-    "lint": "eslint --ext .js, --ignore-path .gitignore ."
+    "lint": "eslint --ext .js, --ignore-path .gitignore .",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/eslint-parser": "^7.23.10",
     "inquirer": "^9.2.15"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.10",
     "@babel/preset-env": "^7.24.0",
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0"
   }
 }
