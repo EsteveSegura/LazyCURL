@@ -1,4 +1,3 @@
-import { spawn } from "child_process";
 import inquirer from "inquirer";
 
 import UrlCommand from "./commands/url-command/index.js";
