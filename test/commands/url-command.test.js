@@ -13,6 +13,12 @@ describe('UrlCommand', () => {
         expect(urlCommand.message).toBe("Introduce la URL:");
     });
 
+    it('should throw error when running "validate" without url', () => {
+        const urlCommand = new Url();
+        
+        expect(() => urlCommand.validate({})).toThrow(InvalidUrlFormat);
+    });
+
     describe('should run "validate" without any errors if the url is ok', () => {
         test('url: https://www.google.com', () => {
             const urlCommand = new Url();
