@@ -1,4 +1,4 @@
-import CurlBuilder from "../../src/infrastructure/services/curl-builder";
+import CurlBuilder from "../../../src/infrastructure/services/curl/curl-builder";
 
 describe('CurlBuilder', () => { 
     it('should build a curl command with the given url', () => {

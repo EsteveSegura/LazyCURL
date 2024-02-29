@@ -1,5 +1,5 @@
-import Url from '../../src/commands/url-command/';
-import InvalidUrlFormat from '../../src/commands/url-command/invalid-url-format.js';
+import Url from '../../../src/commands/url-command/index.js';
+import InvalidUrlFormat from '../../../src/commands/url-command/invalid-url-format.js';
 
 describe('UrlCommand', () => { 
     afterEach(() => {

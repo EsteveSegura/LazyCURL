@@ -3,8 +3,8 @@ import inquirer from "inquirer";
 import UrlCommand from "../commands/url-command/index.js";
 const urlCommand = new UrlCommand();
 
-import CurlBuilder from "../infrastructure/services/curl-builder.js";
-import CurlLauncher from "../infrastructure/services/curl-launcher.js";
+import CurlBuilder from "../infrastructure/services/curl/curl-builder.js";
+import CurlLauncher from "../infrastructure/services/curl/curl-launcher.js";
 
 async function menuBuild() {
     const {url} = await inquirer.prompt([
