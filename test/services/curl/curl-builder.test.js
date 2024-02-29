@@ -1,13 +1,13 @@
 import CurlBuilder from "../../../src/infrastructure/services/curl/curl-builder";
 
-describe('CurlBuilder', () => { 
+describe('CurlBuilder', () => {
     it('should build a curl command with the given url', () => {
         const url = "https://www.google.com";
         const curlBuilder = new CurlBuilder({ url });
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl ${url}`);
+        expect(result).toBe(`curl -X GET ${url}`);
     });
 
     it('should build a curl command without url', () => {
@@ -16,14 +16,73 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl `);
+        expect(result).toBe(`curl -X GET `);
     });
-    
+
     it('should build a curl command when url is not provided', () => {
-        const curlBuilder = new CurlBuilder({  });
+        const curlBuilder = new CurlBuilder({});
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl `);
+        expect(result).toBe(`curl -X GET `);
+    });
+
+    it('should build a curl command with the given url and method (POST)', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const curlBuilder = new CurlBuilder({ url, method });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST ${url}`);
+    });
+
+    it('should build a curl command with the given url and method (PUT)', () => {
+        const url = "https://www.google.com";
+        const method = "PUT";
+        const curlBuilder = new CurlBuilder({ url, method });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X PUT ${url}`);
+    });
+
+    it('should build a curl command with the given url and method (DELETE)', () => {
+        const url = "https://www.google.com";
+        const method = "DELETE";
+        const curlBuilder = new CurlBuilder({ url, method });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X DELETE ${url}`);
+    });
+
+    it('should build a curl command with the given url and method (PATCH)', () => {
+        const url = "https://www.google.com";
+        const method = "PATCH";
+        const curlBuilder = new CurlBuilder({ url, method });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X PATCH ${url}`);
+    });
+
+    it('should build a curl command with the given url and method (GET)', () => {
+        const url = "https://www.google.com";
+        const method = "GET";
+        const curlBuilder = new CurlBuilder({ url, method });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X GET ${url}`);
+    });
+
+    it('should build a curl command with the given url and method by default if not specified (GET)', () => {
+        const url = "https://www.google.com";
+        const curlBuilder = new CurlBuilder({ url });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X GET ${url}`);
     });
 });

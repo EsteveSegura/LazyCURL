@@ -1,10 +1,11 @@
 class CurlBuilder {
-    constructor({url = ""}) {
+    constructor({url = "", method = "GET"}) {
         this.url = url;
+        this.method = method;
     }
 
     build() {
-        return `curl ${this.url}`;
+        return `curl -X ${this.method} ${this.url}`;
     }
 }
 
