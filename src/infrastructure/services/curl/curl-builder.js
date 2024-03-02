@@ -1,11 +1,19 @@
 class CurlBuilder {
-    constructor({url = "", method = "GET"}) {
+    constructor({url = "", method = "GET", headers = ''}) {
         this.url = url;
         this.method = method;
+        this.headers = headers.trim();
     }
 
     build() {
-        return `curl -X ${this.method} ${this.url}`;
+        const components = [
+            'curl -X',
+            this.method,
+            this.url,
+            this.headers
+        ];
+
+        return components.filter(component => component).join(' ');
     }
 }
 
