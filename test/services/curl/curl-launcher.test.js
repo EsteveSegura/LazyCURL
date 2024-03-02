@@ -37,6 +37,7 @@ describe('CurlLauncher', () => {
 
     it('should set up data listeners for stdout and stderr', () => {
         const curlLauncher = new CurlLauncher({ curlCommand: 'curl http://example.com' });
+        curlLauncher.debug = true
         curlLauncher.launch();
 
         expect(mockStdout.on).toHaveBeenCalledWith('data', expect.any(Function));
@@ -52,6 +53,7 @@ describe('CurlLauncher', () => {
         }));
 
         const curlLauncher = new CurlLauncher({ curlCommand: 'curl http://example.com' });
+        curlLauncher.debug = true
         curlLauncher.launch();
 
         expect(mockOn).toHaveBeenCalledWith('close', expect.any(Function));
@@ -70,6 +72,7 @@ describe('CurlLauncher', () => {
 
     it('should log errors from stderr', () => {
         const curlLauncher = new CurlLauncher({ curlCommand: 'curl http://example.com' });
+        curlLauncher.debug = true
         curlLauncher.launch();
 
         const mockDataHandler = mockStderr.on.mock.calls.find(call => call[0] === 'data')[1];
@@ -81,6 +84,7 @@ describe('CurlLauncher', () => {
 
     it('should log exit code when process closes', () => {
         const curlLauncher = new CurlLauncher({ curlCommand: 'curl http://example.com' });
+        curlLauncher.debug = true
         curlLauncher.launch();
 
         const mockCloseHandler = mockOn.mock.calls.find(call => call[0] === 'close')[1];
@@ -111,6 +115,7 @@ describe('CurlLauncher', () => {
     
       it('should handle unexpected data types in stderr', () => {
         const curlLauncher = new CurlLauncher({ curlCommand: 'curl http://example.com' });
+        curlLauncher.debug = true
         curlLauncher.launch();
     
         const mockDataHandler = mockStderr.on.mock.calls.find(call => call[0] === 'data')[1];
@@ -122,6 +127,7 @@ describe('CurlLauncher', () => {
     
       it('should handle non-zero exit codes gracefully', () => {
         const curlLauncher = new CurlLauncher({ curlCommand: 'curl http://example.com' });
+        curlLauncher.debug = true
         curlLauncher.launch();
     
         const mockCloseHandler = mockOn.mock.calls.find(call => call[0] === 'close')[1];
