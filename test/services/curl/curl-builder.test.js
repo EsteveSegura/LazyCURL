@@ -16,7 +16,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X GET `);
+        expect(result).toBe(`curl -X GET`);
     });
 
     it('should build a curl command when url is not provided', () => {
@@ -24,7 +24,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X GET `);
+        expect(result).toBe(`curl -X GET`);
     });
 
     it('should build a curl command with the given url and method (POST)', () => {
@@ -84,5 +84,26 @@ describe('CurlBuilder', () => {
         const result = curlBuilder.build();
 
         expect(result).toBe(`curl -X GET ${url}`);
+    });
+
+    it('should build a curl command with the given url and headers', () => {
+        const url = "https://www.google.com";
+        const headers = "-H 'Content-Type: application/json'";
+        const curlBuilder = new CurlBuilder({ url, headers });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X GET ${url} -H 'Content-Type: application/json'`);
+    });
+
+    it('should build a curl command with the given url, method and multiple headers', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const headers = "-H 'Content-Type: application/json' -H 'Authorization: Bearer 1234'";
+        const curlBuilder = new CurlBuilder({ url, method, headers });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H 'Authorization: Bearer 1234'`);
     });
 });
