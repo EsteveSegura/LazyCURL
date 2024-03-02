@@ -15,8 +15,8 @@ class Headers {
             throw new InvalidHeaderFormat({ message: "Headers are required" });
         }
 
-        const headers = headerString.trim().split(' -H ').map(header => header.trim());
-        const colons = headers.every(header => header.includes(':'));
+        const headers = headerString.trim().split(" -H ").map(header => header.trim());
+        const colons = headers.every(header => header.includes(":"));
         if(!colons) {
             throw new InvalidHeaderFormat({ message: "Invalid header format, please add a colon (:) between the header and the value, and try again" });
         }
@@ -25,7 +25,7 @@ class Headers {
     }
 
     filter({ headerString }) {
-        const headerStringFormated = headerString.trim().split(',').map(header => `-H '${header.trim()}'`).join(' ');
+        const headerStringFormated = headerString.trim().split(",").map(header => `-H '${header.trim()}'`).join(" ");
 
         const isValidated = this.validate({ headerString: headerStringFormated });
         if(!isValidated) {

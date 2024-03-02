@@ -35,8 +35,8 @@ async function menuBuild() {
             type: "input",
             name: headersCommand.name,
             message: headersCommand.message,
-            validate: (value) => {return headersCommand.validate({headerString: value}) },
-            filter: (value) => {return headersCommand.filter({headerString: value}) },
+            validate: (value) => {return headersCommand.validate({headerString: value}); },
+            filter: (value) => {return headersCommand.filter({headerString: value}); },
             when: answers => answers[`${confirmationHeaders.prefix}${headersCommand.name}`]
         }
     ]);

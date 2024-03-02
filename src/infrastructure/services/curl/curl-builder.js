@@ -1,5 +1,5 @@
 class CurlBuilder {
-    constructor({url = "", method = "GET", headers = ''}) {
+    constructor({url = "", method = "GET", headers = ""}) {
         this.url = url;
         this.method = method;
         this.headers = headers.trim();
@@ -7,13 +7,13 @@ class CurlBuilder {
 
     build() {
         const components = [
-            'curl -X',
+            "curl -X",
             this.method,
             this.url,
             this.headers
         ];
 
-        return components.filter(component => component).join(' ');
+        return components.filter(component => component).join(" ");
     }
 }
 
