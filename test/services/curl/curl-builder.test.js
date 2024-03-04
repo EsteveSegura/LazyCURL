@@ -106,4 +106,39 @@ describe('CurlBuilder', () => {
 
         expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H 'Authorization: Bearer 1234'`);
     });
+
+    it('should build a curl command with the given url, method, headers and includeHeaders is true', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const headers = "-H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'";
+        const includeHeaders = true;
+        const curlBuilder = new CurlBuilder({ url, method, headers, includeHeaders });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST -i ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
+    });
+
+    it('should build a curl command with the given url, method, headers and includeHeaders is false', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const headers = "-H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'";
+        const includeHeaders = false;
+        const curlBuilder = new CurlBuilder({ url, method, headers, includeHeaders });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
+    });
+
+    it('shourl build a curl command with the given url, method, headers and includeHeaders by default if not specified', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const headers = "-H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'";
+        const curlBuilder = new CurlBuilder({ url, method, headers });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
+    });
 });

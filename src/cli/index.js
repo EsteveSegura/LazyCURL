@@ -9,6 +9,9 @@ const methodCommand = new MethodCommand();
 import HeadersCommand from "../commands/headers-command/index.js";
 const headersCommand = new HeadersCommand();
 
+import IncludeHeadersCommand from "../commands/include-headers-command/index.js";
+const includeHeadersCommand = new IncludeHeadersCommand();
+
 import CurlBuilder from "../infrastructure/services/curl/curl-builder.js";
 import CurlLauncher from "../infrastructure/services/curl/curl-launcher.js";
 
@@ -17,7 +20,7 @@ import confirmation from "./confirmation.js";
 const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea ejecutar el comando curl?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -38,9 +41,15 @@ async function menuBuild() {
             validate: (value) => {return headersCommand.validate({headerString: value}); },
             filter: (value) => {return headersCommand.filter({headerString: value}); },
             when: answers => answers[`${confirmationHeaders.prefix}${headersCommand.name}`]
+        },
+        {
+            type: "confirm",
+            name: includeHeadersCommand.name,
+            message: includeHeadersCommand.message,
+            default: true,
         }
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand});
