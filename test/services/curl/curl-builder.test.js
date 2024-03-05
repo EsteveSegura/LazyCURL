@@ -141,4 +141,29 @@ describe('CurlBuilder', () => {
 
         expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
     });
+
+    it('should build a curl command with the given url, method, headers and data', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const headers = "-H ' Authorization: Bearer 1234'";
+        const data = '{"name": "John Doe"}';
+        const curlBuilder = new CurlBuilder({ url, method, headers, data });
+
+        const result = curlBuilder.build({ url, method, headers, data });
+
+        expect(result).toBe(`curl -X POST https://www.google.com -H ' Authorization: Bearer 1234' --data '{"name": "John Doe"}'`);
+    });
+
+    it('should build a curl command with the given url, method, headers, data and contentType (acording to data)', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const headers = "-H ' Authorization: Bearer 1234'";
+        const data = '{"name": "John Doe"}';
+        const askContentType = "application/json";
+        const curlBuilder = new CurlBuilder({ url, method, headers, data, askContentType });
+
+        const result = curlBuilder.build({ url, method, headers, data, askContentType});
+
+        expect(result).toBe(`curl -X POST https://www.google.com -H ' Authorization: Bearer 1234' -H "Content-Type: application/json" --data '{"name": "John Doe"}'`);
+    });
 });
