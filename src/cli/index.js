@@ -12,15 +12,22 @@ const headersCommand = new HeadersCommand();
 import IncludeHeadersCommand from "../commands/include-headers-command/index.js";
 const includeHeadersCommand = new IncludeHeadersCommand();
 
+import DataCommand from "../commands/data-command/index.js";
+const dataCommand = new DataCommand();
+
+import AskContentTypeCommand from "../commands/ask-content-type-command/index.js";
+const askContentTypeCommand = new AskContentTypeCommand();
+
 import CurlBuilder from "../infrastructure/services/curl/curl-builder.js";
 import CurlLauncher from "../infrastructure/services/curl/curl-launcher.js";
 
 
 import confirmation from "./confirmation.js";
-const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea ejecutar el comando curl?", valueDefault: false});
+const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea añadir headers?", valueDefault: false});
+const confirmationData = confirmation({name: dataCommand.name, message: "¿Desea añadir payload curl?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -47,9 +54,23 @@ async function menuBuild() {
             name: includeHeadersCommand.name,
             message: includeHeadersCommand.message,
             default: true,
+        },
+        confirmationData,
+        {
+            type: "input",
+            name: dataCommand.name,
+            message: dataCommand.message,
+            when: answers => answers[`${confirmationData.prefix}${dataCommand.name}`]
+        },
+        {
+            type: "list",
+            name: askContentTypeCommand.name,
+            message: askContentTypeCommand.message,
+            choices: askContentTypeCommand.choices,
+            when: answers => answers[dataCommand.name]
         }
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand});
