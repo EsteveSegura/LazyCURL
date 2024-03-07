@@ -67,7 +67,7 @@ describe('CurlLauncher', () => {
         const testData = 'test output';
         mockDataHandler(testData);
 
-        expect(console.log).toHaveBeenCalledWith(`stdout: ${testData}`);
+        expect(console.log).toHaveBeenCalledWith(`${testData}`);
     });
 
     it('should log errors from stderr', () => {
@@ -110,7 +110,7 @@ describe('CurlLauncher', () => {
         const testData = { unexpected: 'object' };
         mockDataHandler(testData);
     
-        expect(console.log).toHaveBeenCalledWith(`stdout: [object Object]`);
+        expect(console.log).toHaveBeenCalledWith(`[object Object]`);
       });
     
       it('should handle unexpected data types in stderr', () => {
