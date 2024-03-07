@@ -1,4 +1,4 @@
-import Data from "../../../src/commands/data-command";
+const Data = require("../../../src/commands/data-command");
 
 describe('DataCommand', () => {
     it('should have name and message properties', () => {

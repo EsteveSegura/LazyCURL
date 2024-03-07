@@ -1,28 +1,27 @@
-import inquirer from "inquirer";
+const inquirer = require("inquirer");
 
-import UrlCommand from "../commands/url-command/index.js";
+const UrlCommand = require("../commands/url-command/index.js");
 const urlCommand = new UrlCommand();
 
-import MethodCommand from "../commands/method-command/index.js";
+const MethodCommand = require("../commands/method-command/index.js");
 const methodCommand = new MethodCommand();
 
-import HeadersCommand from "../commands/headers-command/index.js";
+const HeadersCommand = require("../commands/headers-command/index.js");
 const headersCommand = new HeadersCommand();
 
-import IncludeHeadersCommand from "../commands/include-headers-command/index.js";
+const IncludeHeadersCommand = require("../commands/include-headers-command/index.js");
 const includeHeadersCommand = new IncludeHeadersCommand();
 
-import DataCommand from "../commands/data-command/index.js";
+const DataCommand = require("../commands/data-command/index.js");
 const dataCommand = new DataCommand();
 
-import AskContentTypeCommand from "../commands/ask-content-type-command/index.js";
+const AskContentTypeCommand = require("../commands/ask-content-type-command/index.js");
 const askContentTypeCommand = new AskContentTypeCommand();
 
-import CurlBuilder from "../infrastructure/services/curl/curl-builder.js";
-import CurlLauncher from "../infrastructure/services/curl/curl-launcher.js";
+const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
+const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
-
-import confirmation from "./confirmation.js";
+const confirmation = require("./confirmation.js");
 const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea añadir headers?", valueDefault: false});
 const confirmationData = confirmation({name: dataCommand.name, message: "¿Desea añadir payload curl?", valueDefault: false});
 
@@ -78,4 +77,4 @@ async function menuBuild() {
 }
 
 
-export default menuBuild;
+module.exports = menuBuild;

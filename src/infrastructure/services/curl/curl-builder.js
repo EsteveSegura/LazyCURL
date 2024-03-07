@@ -35,4 +35,4 @@ class CurlBuilder {
     }
 }
 
-export default CurlBuilder;
+module.exports = CurlBuilder;

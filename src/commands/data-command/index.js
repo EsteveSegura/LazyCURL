@@ -7,4 +7,4 @@ class Data {
     // TODO: Add basic validation logic here
 }
 
-export default Data;
+module.exports = Data;

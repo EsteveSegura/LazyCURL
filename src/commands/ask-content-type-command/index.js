@@ -6,4 +6,4 @@ class AskContentType {
     }
 }
 
-export default AskContentType;
+module.exports = AskContentType;

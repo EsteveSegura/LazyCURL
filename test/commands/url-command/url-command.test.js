@@ -1,5 +1,5 @@
-import Url from '../../../src/commands/url-command/index.js';
-import InvalidUrlFormat from '../../../src/commands/url-command/invalid-url-format.js';
+const Url = require('../../../src/commands/url-command/index.js');
+const InvalidUrlFormat = require('../../../src/commands/url-command/invalid-url-format.js');
 
 describe('UrlCommand', () => { 
     afterEach(() => {

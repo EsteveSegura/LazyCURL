@@ -6,4 +6,4 @@ class Method {
     }
 }
 
-export default Method;
+module.exports = Method;

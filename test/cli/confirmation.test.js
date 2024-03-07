@@ -1,4 +1,4 @@
-import confirmation from "../../src/cli/confirmation.js";
+const confirmation = require("../../src/cli/confirmation.js");
 
 describe("confirmation", () => {
     test("should return a object with the properties", () => {
@@ -20,5 +20,4 @@ describe("confirmation", () => {
     test("should throw an error if message is not provided", () => {
         expect(() => confirmation({name: "headers", valueDefault: false})).toThrow("name and message are required");
     });
-    
 });

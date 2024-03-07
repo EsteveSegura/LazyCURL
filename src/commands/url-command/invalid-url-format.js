@@ -4,4 +4,4 @@ class InvalidUrlFormat extends Error {
     }
 }
 
-export default InvalidUrlFormat;
+module.exports = InvalidUrlFormat;

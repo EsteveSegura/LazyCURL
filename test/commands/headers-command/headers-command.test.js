@@ -1,5 +1,5 @@
-import Headers from "../../../src/commands/headers-command";
-import InvalidHeaderFormat from "../../../src/commands/headers-command/invalid-header-format";
+const Headers = require("../../../src/commands/headers-command");
+const InvalidHeaderFormat = require("../../../src/commands/headers-command/invalid-header-format");
 
 describe("HeadersCommand", () => {
     afterEach(() => {

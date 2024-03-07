@@ -13,4 +13,4 @@ function confirmation({prefix = "ask", name, message, valueDefault = true}) {
     };
 }
 
-export default confirmation;
+module.exports = confirmation;
