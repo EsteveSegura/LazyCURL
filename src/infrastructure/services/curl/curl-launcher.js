@@ -8,7 +8,7 @@ class CurlLauncher {
 
     launch() {
         this._curlProcess.stdout.on("data", data => {
-            console.log(`stdout: ${data}`);
+            console.log(`${data}`);
         });
 
         if (this.debug) {
