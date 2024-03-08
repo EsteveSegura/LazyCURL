@@ -1,4 +1,4 @@
-export default {
+module.exports = {
     transform: {},
     testEnvironment: "node",
     testRegex: ".*\\.test\\.js$",
