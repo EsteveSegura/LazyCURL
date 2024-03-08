@@ -1,14 +1,14 @@
-function confirmation({prefix = "ask", name, message, valueDefault = true}) {
+function confirmation({prefixVal = "ask", name, message, valueDefault = true}) {
     if (!name || !message) {
         throw new Error("name and message are required");
     }
 
     return {
         type: "confirm",
-        name: `${prefix}${name}`,
+        name: `${prefixVal}${name}`,
         message,
         default: valueDefault,
-        prefix: prefix,
+        prefixVal: prefixVal,
         onlyName: name,
     };
 }
