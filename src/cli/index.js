@@ -46,7 +46,7 @@ async function menuBuild() {
             message: headersCommand.message,
             validate: (value) => {return headersCommand.validate({headerString: value}); },
             filter: (value) => {return headersCommand.filter({headerString: value}); },
-            when: answers => answers[`${confirmationHeaders.prefix}${headersCommand.name}`]
+            when: answers => answers[`${confirmationHeaders.prefixVal}${headersCommand.name}`]
         },
         {
             type: "confirm",
@@ -59,7 +59,7 @@ async function menuBuild() {
             type: "input",
             name: dataCommand.name,
             message: dataCommand.message,
-            when: answers => answers[`${confirmationData.prefix}${dataCommand.name}`]
+            when: answers => answers[`${confirmationData.prefixVal}${dataCommand.name}`]
         },
         {
             type: "list",
