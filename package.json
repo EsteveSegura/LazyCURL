@@ -9,7 +9,8 @@
   "scripts": {
     "cli": "node ./src/cli/index.js",
     "lint": "eslint --ext .js, --ignore-path .gitignore .",
-    "test": "jest"
+    "test": "jest",
+    "build": "pkg -t node18-linux-x64,node18-win-x64,node18-macos-x64 --output ./dist/lazycurl ./src/index.js"
   },
   "keywords": [],
   "author": "",
