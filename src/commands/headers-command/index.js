@@ -1,4 +1,4 @@
-import InvalidHeaderFormat from "./invalid-header-format.js";
+const InvalidHeaderFormat = require("./invalid-header-format.js");
 
 class Headers {
     constructor() {
@@ -36,4 +36,4 @@ class Headers {
     }
 }
 
-export default Headers;
+module.exports = Headers;

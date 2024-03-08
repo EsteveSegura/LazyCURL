@@ -1,4 +1,4 @@
-import AskContentType from "../../../src/commands/ask-content-type-command";
+const AskContentType = require("../../../src/commands/ask-content-type-command");
 
 describe('AskContentTypeCommand', () => {
     it('should have name and message properties', () => {

@@ -1,5 +1,5 @@
-import CurlLauncher from '../../../src/infrastructure/services/curl/curl-launcher'; // Asegúrate de que la ruta de importación sea correcta
-import { spawn } from 'child_process';
+const CurlLauncher =  require('../../../src/infrastructure/services/curl/curl-launcher');
+const { spawn } = require('child_process');
 
 jest.mock('child_process', () => ({
     spawn: jest.fn(),

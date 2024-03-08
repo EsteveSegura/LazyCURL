@@ -1,4 +1,4 @@
-import IncludeHeadersCommand  from '../../../src/commands/include-headers-command/index.js';
+const IncludeHeadersCommand = require('../../../src/commands/include-headers-command/index.js');
 
 describe("IncludeHeadersCommand", () => {
     afterEach(() => {

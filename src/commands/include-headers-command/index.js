@@ -5,4 +5,4 @@ class IncludeHeadersCommand {
     }
 }
 
-export default IncludeHeadersCommand;
+module.exports = IncludeHeadersCommand;

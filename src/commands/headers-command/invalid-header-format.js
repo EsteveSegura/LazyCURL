@@ -4,4 +4,4 @@ class InvalidHeaderFormat extends Error {
     }
 }
 
-export default InvalidHeaderFormat;
+module.exports = InvalidHeaderFormat;

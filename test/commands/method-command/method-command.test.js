@@ -1,4 +1,4 @@
-import Method from '../../../src/commands/method-command/index.js';
+const Method = require('../../../src/commands/method-command/index.js');
 
 describe('MethodCommand', () => {
     it('should have name and message properties', () => {

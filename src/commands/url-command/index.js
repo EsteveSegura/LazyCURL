@@ -1,4 +1,4 @@
-import InvalidUrlFormat from "./invalid-url-format.js";
+const InvalidUrlFormat = require("./invalid-url-format.js");
 
 class Url {
     constructor() {
@@ -17,4 +17,4 @@ class Url {
     }
 }
 
-export default Url;
+module.exports = Url;

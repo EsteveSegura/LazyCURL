@@ -1,4 +1,4 @@
-import { spawn } from "child_process";
+const { spawn } = require("child_process");
 
 class CurlLauncher {
     constructor({ curlCommand }) {
@@ -23,4 +23,4 @@ class CurlLauncher {
     }
 }
 
-export default CurlLauncher;
+module.exports = CurlLauncher;
