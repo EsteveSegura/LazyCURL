@@ -3,7 +3,7 @@ const InvalidHeaderFormat = require("./invalid-header-format.js");
 class Headers {
     constructor() {
         this.name = "headers";
-        this.message = "Introduce los encabezados (separados por coma: 'header1: value1, header2: value2'):";
+        this.message = "Introduce los encabezados\n(separados por coma: 'header1: value1, header2: value2'):";
     }
 
     validate({ headerString }) {
