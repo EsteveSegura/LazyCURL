@@ -8,7 +8,7 @@ describe("confirmation", () => {
             name: 'askheaders',
             message: '¿Desea ejecutar el comando curl?',
             default: false,
-            prefix: 'ask',
+            prefixVal: 'ask',
             onlyName: 'headers'
         });
     });
