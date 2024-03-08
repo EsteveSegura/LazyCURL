@@ -10,7 +10,7 @@ describe("HeadersCommand", () => {
         const headersCommand = new Headers();
 
         expect(headersCommand.name).toBe("headers");
-        expect(headersCommand.message).toBe("Introduce los encabezados (separados por coma: 'header1: value1, header2: value2'):");
+        expect(headersCommand.message).toBe("Introduce los encabezados\n(separados por coma: 'header1: value1, header2: value2'):");
     });
 
     it("should throw error when running 'validate' without headers", () => {
