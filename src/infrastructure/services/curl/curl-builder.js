@@ -1,5 +1,5 @@
 class CurlBuilder {
-    constructor({url = "", method = "GET", headers = "", includeHeaders = false,  data = null, askContentType = null, output = null}) {
+    constructor({url = "", method = "GET", headers = "", includeHeaders = false,  data = null, askContentType = null, output = null, userAgent = null}) {
         this.url = url;
         this.method = method;
         this.headers = headers.trim();
@@ -7,6 +7,7 @@ class CurlBuilder {
         this.data = data;
         this.askContentType = askContentType;
         this.output = output;
+        this.userAgent = userAgent;
     }
 
     build() {
@@ -18,6 +19,7 @@ class CurlBuilder {
             this._askContentTypeTranslate(this.askContentType),
             this._dataTranslate(this.data),
             this._outputTranslate(this.output),
+            this._userAgentTranslate(this.userAgent),
             this.url,
         ];
 
@@ -47,6 +49,10 @@ class CurlBuilder {
 
     _outputTranslate(value) {
         return value ? `--output ${value}` : "";
+    }
+
+    _userAgentTranslate(value) {
+        return value ? `--user-agent '${value}'` : "";
     }
 }
 
