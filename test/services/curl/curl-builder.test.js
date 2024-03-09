@@ -222,4 +222,27 @@ describe('CurlBuilder', () => {
 
         expect(result).toBe(`curl -X POST ${url}`);
     });
+
+    it('should build a curl command with the given url, method and allowing insecure connections', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const insecure = true;
+        const curlBuilder = new CurlBuilder({ url, method, insecure });
+        
+        const result = curlBuilder.build();
+        
+        expect(result).toBe(`curl -X POST --insecure ${url}`);
+    });
+    
+    it('should build a curl command with the given url, method and not allowing insecure connections', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const insecure = false;
+        const curlBuilder = new CurlBuilder({ url, method, insecure });
+        
+        const result = curlBuilder.build();
+        
+        expect(result).toBe(`curl -X POST ${url}`);
+    });
+
 });
