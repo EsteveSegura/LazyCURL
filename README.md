@@ -49,9 +49,9 @@ Explore the range of capabilities LazyCURL brings to your command line:
 - ✅ **Include**  (`-i`): Show server response headers in your output, useful for seeing what the server is sending back.
 - ✅ **Output** (`--output [file]`): Save the server's response to a file, great for downloading files or saving API responses.
 - ✅ **UserAgent** (`--user-agent`): Change your user agent to test how responses vary for different browsers or devices.
-- ❌ **Location** (`--location`): Automatically follow redirects, so if the server points you to a new URL, LazyCURL will follow.
+- ✅ **Location** (`--location`): Automatically follow redirects, so if the server points you to a new URL, LazyCURL will follow.
+- ❌ **Insecure** (`--insecure`): Skip SSL certificate verification, handy for development with self-signed certificates.
+- ❌ **Verbose** (`--verbose`): Get detailed info about your request and response, great for debugging.
 - ❌ **User** (`--user [user:password]`): Pass login information for sites that require a username and password.
 - ❌ **Cookie** (`--cookie [name=value]`): Include cookies with your request, important for sites that track sessions with cookies.
-- ❌ **Verbose** (`--verbose`): Get detailed info about your request and response, great for debugging.
 - ❌ **Proxy** (`--proxy [protocol://user:password]@ProxyHost:[port]`): Connect through a proxy server, useful for testing or privacy.
-- ❌ **Insecure** (`--insecure`): Skip SSL certificate verification, handy for development with self-signed certificates.
