@@ -79,7 +79,7 @@ describe('CurlLauncher', () => {
         const testError = 'test error';
         mockDataHandler(testError);
 
-        expect(console.error).toHaveBeenCalledWith(`stderr: ${testError}`);
+        expect(console.error).toHaveBeenCalledWith(`${testError}`);
     });
 
     it('should log exit code when process closes', () => {
@@ -122,7 +122,7 @@ describe('CurlLauncher', () => {
         const testData = { unexpected: 'object' };
         mockDataHandler(testData);
     
-        expect(console.error).toHaveBeenCalledWith(`stderr: [object Object]`);
+        expect(console.error).toHaveBeenCalledWith(`[object Object]`);
       });
     
       it('should handle non-zero exit codes gracefully', () => {
