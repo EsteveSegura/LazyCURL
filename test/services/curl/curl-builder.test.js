@@ -245,4 +245,25 @@ describe('CurlBuilder', () => {
         expect(result).toBe(`curl -X POST ${url}`);
     });
 
+    it('should build a curl command with the given url, method and verbose', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const verbose = true;
+        const curlBuilder = new CurlBuilder({ url, method, verbose });
+        
+        const result = curlBuilder.build();
+        
+        expect(result).toBe(`curl -X POST --verbose ${url}`);
+    });
+
+    it('should build a curl command with the given url, method and not verbose', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const verbose = false;
+        const curlBuilder = new CurlBuilder({ url, method, verbose });
+        
+        const result = curlBuilder.build();
+        
+        expect(result).toBe(`curl -X POST ${url}`);
+    });
 });
