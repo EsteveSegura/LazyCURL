@@ -189,4 +189,15 @@ describe('CurlBuilder', () => {
 
         expect(result).toBe(`curl -X POST --output response.json ${url}`);
     });
+
+    it('should build a curl command with the given url, method and userAgent', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const userAgent = "Mozilla/5.0";
+        const curlBuilder = new CurlBuilder({ url, method, userAgent });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST --user-agent 'Mozilla/5.0' ${url}`);
+    });
 });
