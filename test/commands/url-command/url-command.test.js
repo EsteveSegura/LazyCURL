@@ -10,7 +10,7 @@ describe('UrlCommand', () => {
         const urlCommand = new Url();
         
         expect(urlCommand.name).toBe("url");
-        expect(urlCommand.message).toBe("Introduce la URL:");
+        expect(urlCommand.message).toBe("Enter the URL:");
     });
 
     it('should throw error when running "validate" without url', () => {

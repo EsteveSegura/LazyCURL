@@ -5,6 +5,6 @@ describe('Location', () => {
         const locationCommand = new Location();
         
         expect(locationCommand.name).toBe("location");
-        expect(locationCommand.message).toBe("Quieres seguir redirecciones?:");
+        expect(locationCommand.message).toBe("Do you want to follow redirects?:");
     });
 });

@@ -5,6 +5,6 @@ describe('Verbose', () => {
         const verboseCommand = new Verbose();
         
         expect(verboseCommand.name).toBe("verbose");
-        expect(verboseCommand.message).toBe("Quieres obtener información detallada de la petición (debug) ?:");
+        expect(verboseCommand.message).toBe("Do you want detailed request information (debug)?:");
     });
 });

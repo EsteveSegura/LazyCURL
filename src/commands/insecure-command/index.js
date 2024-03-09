@@ -1,7 +1,7 @@
 class Insecure {
     constructor() {
         this.name = "insecure";
-        this.message = "Quieres permitir peticiones inseguras (No verificar HTTPS) ?:";
+        this.message = "Do you want to allow insecure requests (Do not verify HTTPS)?:";
     }
 }
 

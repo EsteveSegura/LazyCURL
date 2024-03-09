@@ -1,7 +1,7 @@
 class UserAgent {
     constructor() {
         this.name = "userAgent";
-        this.message = "Introduce el User-Agent:";
+        this.message = "Enter the User-Agent:";
     }
 }
 

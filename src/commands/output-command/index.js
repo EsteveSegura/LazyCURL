@@ -1,7 +1,7 @@
 class Output {
     constructor() {
         this.name = "output";
-        this.message = "Introduce el nombre del archivo de salida:";
+        this.message = "Enter the output file name:";
     }
 }
 

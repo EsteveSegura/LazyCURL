@@ -9,6 +9,6 @@ describe("IncludeHeadersCommand", () => {
         const includeHeadersCommand = new IncludeHeadersCommand();
 
         expect(includeHeadersCommand.name).toBe("includeHeaders");
-        expect(includeHeadersCommand.message).toBe("Ver los headers de la petición:");
+        expect(includeHeadersCommand.message).toBe("View the request headers:");
     });
 });

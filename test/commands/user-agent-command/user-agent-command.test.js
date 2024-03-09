@@ -5,6 +5,6 @@ describe('UserAgentCommand', () => {
         const userAgentCommand = new UserAnget();
         
         expect(userAgentCommand.name).toBe("userAgent");
-        expect(userAgentCommand.message).toBe("Introduce el User-Agent:");
+        expect(userAgentCommand.message).toBe("Enter the User-Agent:");
     });
 });

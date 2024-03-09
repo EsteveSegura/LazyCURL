@@ -5,6 +5,6 @@ describe('OutputCommand', () => {
         const outputCommand = new Output();
         
         expect(outputCommand.name).toBe("output");
-        expect(outputCommand.message).toBe("Introduce el nombre del archivo de salida:");
+        expect(outputCommand.message).toBe("Enter the output file name:");
     });
 });

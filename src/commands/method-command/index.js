@@ -1,7 +1,7 @@
 class Method {
     constructor() {
         this.name = "method";
-        this.message = "Selecciona el método HTTP:";
+        this.message = "Select the HTTP method:";
         this.choices =  ["GET", "POST", "PUT", "DELETE", "PATCH"];
     }
 }

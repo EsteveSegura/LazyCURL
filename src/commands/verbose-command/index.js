@@ -1,7 +1,7 @@
 class Verbose {
     constructor() {
         this.name = "verbose";
-        this.message = "Quieres obtener información detallada de la petición (debug) ?:";
+        this.message = "Do you want detailed request information (debug)?:";
     }
 }
 

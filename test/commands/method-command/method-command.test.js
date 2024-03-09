@@ -5,7 +5,7 @@ describe('MethodCommand', () => {
         const methodCommand = new Method();
         
         expect(methodCommand.name).toBe("method");
-        expect(methodCommand.message).toBe("Selecciona el método HTTP:");
+        expect(methodCommand.message).toBe("Select the HTTP method:");
         expect(methodCommand.choices).toEqual(['GET', 'POST', 'PUT', 'DELETE', 'PATCH']);
     });
 });

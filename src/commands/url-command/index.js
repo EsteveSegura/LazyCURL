@@ -3,7 +3,7 @@ const InvalidUrlFormat = require("./invalid-url-format.js");
 class Url {
     constructor() {
         this.name = "url";
-        this.message = "Introduce la URL:";
+        this.message = "Enter the URL:";
     }
 
     validate({ url }) {

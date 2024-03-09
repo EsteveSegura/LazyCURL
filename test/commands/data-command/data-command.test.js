@@ -5,6 +5,6 @@ describe('DataCommand', () => {
         const dataCommand = new Data();
         
         expect(dataCommand.name).toBe("data");
-        expect(dataCommand.message).toBe("Introduce el body:");
+        expect(dataCommand.message).toBe("Enter the body:");
     });
 });

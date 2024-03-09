@@ -37,10 +37,10 @@ const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
 const confirmation = require("./confirmation.js");
-const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea añadir headers?", valueDefault: false});
-const confirmationData = confirmation({name: dataCommand.name, message: "¿Desea añadir payload curl?", valueDefault: false});
-const confirmationOutput = confirmation({name: outputCommand.name, message: "¿Desea añadir un archivo de salida?", valueDefault: false});
-const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "¿Desea personalizar el userAgent?", valueDefault: false});
+const confirmationHeaders = confirmation({name: headersCommand.name, message: "Do you want to add headers?", valueDefault: false});
+const confirmationData = confirmation({name: dataCommand.name, message: "Do you want to add curl payload?", valueDefault: false});
+const confirmationOutput = confirmation({name: outputCommand.name, message: "Do you want to add an output file?", valueDefault: false});
+const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "Do you want to customize the userAgent?", valueDefault: false});
 
 async function menuBuild() {
     const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose } = await inquirer.prompt([

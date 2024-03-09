@@ -5,7 +5,7 @@ describe('AskContentTypeCommand', () => {
         const askContentTypeCommand = new AskContentType();
         
         expect(askContentTypeCommand.name).toBe("askContentType");
-        expect(askContentTypeCommand.message).toBe("Que formato tiene el payload? :");
+        expect(askContentTypeCommand.message).toBe("What format does the payload have? :");
         expect(askContentTypeCommand.choices).toEqual(["application/json", "application/xml", "application/x-www-form-urlencoded", "multipart/form-data"]);
     });
 });

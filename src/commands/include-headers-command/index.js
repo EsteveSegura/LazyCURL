@@ -1,7 +1,7 @@
 class IncludeHeadersCommand {
     constructor() {
         this.name = "includeHeaders";
-        this.message = "Ver los headers de la petición:";
+        this.message = "View the request headers:";
     }
 }
 

@@ -5,6 +5,6 @@ describe('Insecure', () => {
         const insecureCommand = new Insecure();
         
         expect(insecureCommand.name).toBe("insecure");
-        expect(insecureCommand.message).toBe("Quieres permitir peticiones inseguras (No verificar HTTPS) ?:");
+        expect(insecureCommand.message).toBe("Do you want to allow insecure requests (Do not verify HTTPS)?:");
     });
 });

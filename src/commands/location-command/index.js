@@ -1,7 +1,7 @@
 class Location {
     constructor(){
         this.name = "location";
-        this.message = "Quieres seguir redirecciones?:";
+        this.message = "Do you want to follow redirects?:";
     }
 }
 
