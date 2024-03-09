@@ -27,6 +27,9 @@ const userAgentCommand = new UserAgentCommand();
 const LocationCommand = require("../commands/location-command/index.js");
 const locationCommand = new LocationCommand();
 
+const InsecureCommand = require("../commands/insecure-command/index.js");
+const insecureCommand = new InsecureCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
@@ -37,7 +40,7 @@ const confirmationOutput = confirmation({name: outputCommand.name, message: "¿D
 const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "¿Desea personalizar el userAgent?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -98,9 +101,15 @@ async function menuBuild() {
             name: locationCommand.name,
             message: locationCommand.message,
             default: false,
-        }
+        },
+        {
+            type: "confirm",
+            name: insecureCommand.name,
+            message: insecureCommand.message,
+            default: false,
+        },
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand});
