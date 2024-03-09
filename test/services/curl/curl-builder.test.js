@@ -93,7 +93,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X GET ${url} -H 'Content-Type: application/json'`);
+        expect(result).toBe(`curl -X GET -H 'Content-Type: application/json' ${url}`);
     });
 
     it('should build a curl command with the given url, method and multiple headers', () => {
@@ -104,7 +104,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H 'Authorization: Bearer 1234'`);
+        expect(result).toBe(`curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 1234' ${url}`);
     });
 
     it('should build a curl command with the given url, method, headers and includeHeaders is true', () => {
@@ -116,7 +116,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X POST -i ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
+        expect(result).toBe(`curl -X POST -i -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234' ${url}`);
     });
 
     it('should build a curl command with the given url, method, headers and includeHeaders is false', () => {
@@ -128,7 +128,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
+        expect(result).toBe(`curl -X POST -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234' ${url}`);
     });
 
     it('shourl build a curl command with the given url, method, headers and includeHeaders by default if not specified', () => {
@@ -139,7 +139,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build();
 
-        expect(result).toBe(`curl -X POST ${url} -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234'`);
+        expect(result).toBe(`curl -X POST -H 'Content-Type: application/json' -H ' Authorization: Bearer 1234' ${url}`);
     });
 
     it('should build a curl command with the given url, method, headers and data', () => {
@@ -151,7 +151,7 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build({ url, method, headers, data });
 
-        expect(result).toBe(`curl -X POST https://www.google.com -H ' Authorization: Bearer 1234' --data '{"name": "John Doe"}'`);
+        expect(result).toBe(`curl -X POST -H ' Authorization: Bearer 1234' --data '{"name": "John Doe"}' ${url}`);
     });
 
     it('should build a curl command with the given url, method, headers, data and contentType (acording to data)', () => {
@@ -164,6 +164,29 @@ describe('CurlBuilder', () => {
 
         const result = curlBuilder.build({ url, method, headers, data, askContentType});
 
-        expect(result).toBe(`curl -X POST https://www.google.com -H ' Authorization: Bearer 1234' -H "Content-Type: application/json" --data '{"name": "John Doe"}'`);
+        expect(result).toBe(`curl -X POST -H ' Authorization: Bearer 1234' -H "Content-Type: application/json" --data '{"name": "John Doe"}' ${url}`);
+    });
+
+    it('should build a curl command with the given url, method, and output', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const output = "response.json";
+        const curlBuilder = new CurlBuilder({ url, method, output });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST --output response.json ${url}`);
+    });
+
+    it('should build a curl command with the given url, method, and output and remove the flag -i if was specified', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const output = "response.json";
+        const includeHeaders = true;
+        const curlBuilder = new CurlBuilder({ url, method, output, includeHeaders });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST --output response.json ${url}`);
     });
 });
