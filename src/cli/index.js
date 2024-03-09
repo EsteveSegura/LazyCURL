@@ -18,15 +18,19 @@ const dataCommand = new DataCommand();
 const AskContentTypeCommand = require("../commands/ask-content-type-command/index.js");
 const askContentTypeCommand = new AskContentTypeCommand();
 
+const OutputCommand = require("../commands/output-command/index.js");
+const outputCommand = new OutputCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
 const confirmation = require("./confirmation.js");
 const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea añadir headers?", valueDefault: false});
 const confirmationData = confirmation({name: dataCommand.name, message: "¿Desea añadir payload curl?", valueDefault: false});
+const confirmationOutput = confirmation({name: outputCommand.name, message: "¿Desea añadir un archivo de salida?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders, data, askContentType } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType, output } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -67,9 +71,16 @@ async function menuBuild() {
             message: askContentTypeCommand.message,
             choices: askContentTypeCommand.choices,
             when: answers => answers[dataCommand.name]
+        },
+        confirmationOutput,
+        {
+            type: "input",
+            name: outputCommand.name,
+            message: outputCommand.message,
+            when: answers => answers[`${confirmationOutput.prefixVal}${outputCommand.name}`]
         }
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand});
