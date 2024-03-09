@@ -1,9 +1,9 @@
 const { spawn } = require("child_process");
 
 class CurlLauncher {
-    constructor({ curlCommand }) {
+    constructor({ curlCommand, debug = false }) {
         this._curlProcess = spawn(curlCommand, { shell: true });
-        this.debug = false;
+        this.debug = debug;
     }
 
     launch() {
@@ -13,7 +13,7 @@ class CurlLauncher {
 
         if (this.debug) {
             this._curlProcess.stderr.on("data", data => {
-                console.error(`stderr: ${data}`);
+                console.error(`${data}`);
             });
 
             this._curlProcess.on("close", code => {
