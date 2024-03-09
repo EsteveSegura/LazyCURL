@@ -1,7 +1,7 @@
 {
   "name": "lazycurl",
-  "version": "1.0.0",
-  "description": "Use curl, the easy way.",
+  "version": "0.1.0",
+  "description": "Unleash the Power of cURL, Effortlessly.",
   "bin": {
     "lazycurl": "./bin/index.js"
   },
