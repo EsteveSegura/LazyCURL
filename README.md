@@ -6,25 +6,33 @@
 ![License](https://img.shields.io/badge/License-MIT-blue)
 ![Version](https://img.shields.io/badge/Version-0.0.1-blue)
 
-![Showing the demo](./assets/demo.gif)
+![Showing the demo](https://github.com/EsteveSegura/LazyCURL/raw/main/assets/demo.gif)
 
-## Installation
+## Installation (NPM)
+
+To set up LazyCURL for CLI Usage, follow these steps:
+
+```bash
+npm i -G lazycurl
+```
+
+## Installation (github)
 
 To set up LazyCURL for development, follow these steps:
 
 ```bash
 git clone https://github.com/EsteveSegura/LazyCURL.git
 cd LazyCURL 
-npm install
+npm install # Requires NodeJS installed
 ```
-
-## Usage (CLI)
 
 Once LazyCURL is installed for development, install it globally on your system using:
 
 ```bash
 npm install -g .
 ```
+
+## Usage
 
 After installation, you can access the command line tool using:
 
