@@ -21,6 +21,9 @@ const askContentTypeCommand = new AskContentTypeCommand();
 const OutputCommand = require("../commands/output-command/index.js");
 const outputCommand = new OutputCommand();
 
+const UserAgentCommand = require("../commands/user-agent-command/index.js");
+const userAgentCommand = new UserAgentCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
@@ -28,9 +31,10 @@ const confirmation = require("./confirmation.js");
 const confirmationHeaders = confirmation({name: headersCommand.name, message: "¿Desea añadir headers?", valueDefault: false});
 const confirmationData = confirmation({name: dataCommand.name, message: "¿Desea añadir payload curl?", valueDefault: false});
 const confirmationOutput = confirmation({name: outputCommand.name, message: "¿Desea añadir un archivo de salida?", valueDefault: false});
+const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "¿Desea personalizar el userAgent?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders, data, askContentType, output } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -78,9 +82,16 @@ async function menuBuild() {
             name: outputCommand.name,
             message: outputCommand.message,
             when: answers => answers[`${confirmationOutput.prefixVal}${outputCommand.name}`]
+        },
+        confirmationUserAgent,
+        {
+            type: "input",
+            name: userAgentCommand.name,
+            message: userAgentCommand.message,
+            when: answers => answers[`${confirmationUserAgent.prefixVal}${userAgentCommand.name}`]
         }
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand});
