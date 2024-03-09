@@ -200,4 +200,26 @@ describe('CurlBuilder', () => {
 
         expect(result).toBe(`curl -X POST --user-agent 'Mozilla/5.0' ${url}`);
     });
+
+    it('should build a curl command with the given url, method and following redirections with location', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const location = true;
+        const curlBuilder = new CurlBuilder({ url, method, location });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST --location ${url}`);
+    });
+
+    it('should build a curl command with the given url, method and not following redirections with location', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const location = false;
+        const curlBuilder = new CurlBuilder({ url, method, location });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST ${url}`);
+    });
 });
