@@ -40,6 +40,9 @@ const cookieCommand = new CookieCommand();
 const UserCommand = require("../commands/user-command/index.js");
 const userCommand = new UserCommand();
 
+const ProxyCommand = require("../commands/proxy-command");
+const proxyCommand = new ProxyCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
@@ -50,6 +53,7 @@ const confirmationOutput = confirmation({name: outputCommand.name, message: "Do 
 const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "Do you want to customize the userAgent?", valueDefault: false});
 const confirmationCookie = confirmation({name: cookieCommand.name, message: "Do you want to add cookies?", valueDefault: false});
 const confirmationUser = confirmation({name: userCommand.name, message: "Do you want to add user and password (basic-auth) ?", valueDefault: false});
+const confirmationProxy = confirmation({name: proxyCommand.name, message: "Do you want to add a proxy?", valueDefault: false});
 
 async function menuBuild() {
     const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user } = await inquirer.prompt([
@@ -143,6 +147,14 @@ async function menuBuild() {
             message: userCommand.message,
             validate: (value) => userCommand.validate({ authString: value }),
             when: answers => answers[`${confirmationUser.prefixVal}${userCommand.name}`]
+        },
+        confirmationProxy,
+        {
+            type: "input",
+            name: proxyCommand.name,
+            message: proxyCommand.message,
+            validate: (value) => proxyCommand.validate({ proxyString: value }),
+            when: answers => answers[`${confirmationProxy.prefixVal}${proxyCommand.name}`]
         },
     ]);
     const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user});
