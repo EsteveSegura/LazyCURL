@@ -45,6 +45,7 @@ const confirmationHeaders = confirmation({name: headersCommand.name, message: "D
 const confirmationData = confirmation({name: dataCommand.name, message: "Do you want to add curl payload?", valueDefault: false});
 const confirmationOutput = confirmation({name: outputCommand.name, message: "Do you want to add an output file?", valueDefault: false});
 const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "Do you want to customize the userAgent?", valueDefault: false});
+const confirmationCookie = confirmation({name: cookieCommand.name, message: "Do you want to add cookies?", valueDefault: false});
 
 async function menuBuild() {
     const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie } = await inquirer.prompt([
@@ -123,11 +124,13 @@ async function menuBuild() {
             message: verboseCommand.message,
             default: false,
         },
+        confirmationCookie,
         {
             type: "input",
             name: cookieCommand.name,
             message: cookieCommand.message,
-            validate: (value) => {return cookieCommand.validate({cookieString: value}); }
+            validate: (value) => {return cookieCommand.validate({cookieString: value}); },
+            when: answers => answers[`${confirmationCookie.prefixVal}${cookieCommand.name}`]
         }
     ]);
     const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie});
