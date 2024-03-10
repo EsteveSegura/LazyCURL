@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+inquirer.registerPrompt("autocomplete", require("inquirer-autocomplete-prompt"));
 
 const UrlCommand = require("../commands/url-command/index.js");
 const urlCommand = new UrlCommand();
@@ -94,9 +95,11 @@ async function menuBuild() {
         },
         confirmationUserAgent,
         {
-            type: "input",
+            type: "autocomplete",
+            suggestOnly: true,
             name: userAgentCommand.name,
             message: userAgentCommand.message,
+            source: (_, input) => userAgentCommand.suggestions.filter((item) => item.toLowerCase().includes(input)),
             when: answers => answers[`${confirmationUserAgent.prefixVal}${userAgentCommand.name}`]
         },
         {
