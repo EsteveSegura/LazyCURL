@@ -60,6 +60,6 @@ Explore the range of capabilities LazyCURL brings to your command line:
 - ✅ **Location** (`--location`): Automatically follow redirects, so if the server points you to a new URL, LazyCURL will follow.
 - ✅ **Insecure** (`--insecure`): Skip SSL certificate verification, handy for development with self-signed certificates.
 - ✅ **Verbose** (`--verbose`): Get detailed info about your request and response, great for debugging.
+- ✅ **Cookie** (`--cookie [name=value]`): Include cookies with your request, important for sites that track sessions with cookies.
 - ❌ **User** (`--user [user:password]`): Pass login information for sites that require a username and password.
-- ❌ **Cookie** (`--cookie [name=value]`): Include cookies with your request, important for sites that track sessions with cookies.
 - ❌ **Proxy** (`--proxy [protocol://user:password]@ProxyHost:[port]`): Connect through a proxy server, useful for testing or privacy.
