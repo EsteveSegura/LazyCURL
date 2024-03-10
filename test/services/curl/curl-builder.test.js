@@ -266,4 +266,26 @@ describe('CurlBuilder', () => {
         
         expect(result).toBe(`curl -X POST ${url}`);
     });
+
+    it('should build a curl command with the given url, method and cookie', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const cookie = "session=1234";
+        const curlBuilder = new CurlBuilder({ url, method, cookie });
+        
+        const result = curlBuilder.build();
+        
+        expect(result).toBe(`curl -X POST --cookie 'session=1234' ${url}`);
+    });
+
+    it('should build a curl command with the given url, method and multiple cookies', () => {
+        const url = "https://www.google.com";
+        const method = "POST";
+        const cookie = "session=1234, user=JohnDoe";
+        const curlBuilder = new CurlBuilder({ url, method, cookie });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST --cookie 'session=1234' --cookie 'user=JohnDoe' ${url}`);
+    });
 });
