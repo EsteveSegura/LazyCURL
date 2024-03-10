@@ -34,6 +34,9 @@ const insecureCommand = new InsecureCommand();
 const VerboseCommand = require("../commands/verbose-command/index.js");
 const verboseCommand = new VerboseCommand();
 
+const CookieCommand = require("../commands/cookie-command/index.js");
+const cookieCommand = new CookieCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
@@ -44,7 +47,7 @@ const confirmationOutput = confirmation({name: outputCommand.name, message: "Do 
 const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "Do you want to customize the userAgent?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -119,14 +122,19 @@ async function menuBuild() {
             name: verboseCommand.name,
             message: verboseCommand.message,
             default: false,
+        },
+        {
+            type: "input",
+            name: cookieCommand.name,
+            message: cookieCommand.message,
+            validate: (value) => {return cookieCommand.validate({cookieString: value}); }
         }
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand, debug: verbose});
     curlLauncher.launch();
 }
-
 
 module.exports = menuBuild;
