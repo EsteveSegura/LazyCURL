@@ -16,7 +16,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^8.2.6"
+    "inquirer": "^8.2.6",
+    "inquirer-autocomplete-prompt": "^2.0.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.23.10",
