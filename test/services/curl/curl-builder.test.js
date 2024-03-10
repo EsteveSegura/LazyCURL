@@ -288,4 +288,37 @@ describe('CurlBuilder', () => {
 
         expect(result).toBe(`curl -X POST --cookie 'session=1234' --cookie 'user=JohnDoe' ${url}`);
     });
+
+    it('should build a curl command with basic authentication', () => {
+        const url = "https://www.example.com";
+        const user = "username:password";
+        const curlBuilder = new CurlBuilder({ url, user });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X GET --user 'username:password' ${url}`);
+    });
+
+    it('should build a curl command with basic authentication and other options', () => {
+        const url = "https://www.example.com";
+        const method = "POST";
+        const data = '{"key": "value"}';
+        const headers = "-H 'Content-Type: application/json'";
+        const user = "username:password";
+        const curlBuilder = new CurlBuilder({ url, method, data, headers, user });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST -H 'Content-Type: application/json' --data '${data}' --user 'username:password' ${url}`);
+    });
+
+    it('should not include --user option when user is not provided', () => {
+        const url = "https://www.example.com";
+        const curlBuilder = new CurlBuilder({ url });
+
+        const result = curlBuilder.build();
+
+        expect(result).not.toContain("--user");
+        expect(result).toBe(`curl -X GET ${url}`);
+    });
 });
