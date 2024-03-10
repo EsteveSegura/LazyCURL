@@ -1,5 +1,5 @@
 class CurlBuilder {
-    constructor({url = "", method = "GET", headers = "", includeHeaders = false,  data = null, askContentType = null, output = null, userAgent = null, location = null, insecure = null, verbose = null, cookie = null}) {
+    constructor({url = "", method = "GET", headers = "", includeHeaders = false,  data = null, askContentType = null, output = null, userAgent = null, location = null, insecure = null, verbose = null, cookie = null, user = null}) {
         this.url = url;
         this.method = method;
         this.headers = headers.trim();
@@ -12,6 +12,7 @@ class CurlBuilder {
         this.insecure = insecure;
         this.verbose = verbose;
         this.cookie = cookie;
+        this.user = user;
     }
 
     build() {
@@ -28,6 +29,7 @@ class CurlBuilder {
             this._insecureTranslate(this.insecure),
             this._verboseTranslate(this.verbose),
             this._cookieTranslate(this.cookie),
+            this._userTranslate(this.user),
             this.url,
         ];
 
@@ -87,6 +89,10 @@ class CurlBuilder {
         }
 
         return value.split(",").map(cookie => `--cookie '${cookie.trim()}'`).join(" ");
+    }
+
+    _userTranslate(value) {
+        return value ? `--user '${value}'` : "";
     }
 }
 
