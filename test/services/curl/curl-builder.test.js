@@ -321,4 +321,51 @@ describe('CurlBuilder', () => {
         expect(result).not.toContain("--user");
         expect(result).toBe(`curl -X GET ${url}`);
     });
+
+    it('should build a curl command with proxy', () => {
+        const url = "https://www.example.com";
+        const proxy = "http://user:password@ProxyHost:8080";
+        const curlBuilder = new CurlBuilder({ url, proxy });
+
+        const result = curlBuilder.build();
+
+        expect(result).toContain(`--proxy '${proxy}'`);
+        expect(result).toBe(`curl -X GET --proxy '${proxy}' ${url}`);
+    });
+
+    it('should include the proxy option with other options', () => {
+        const url = "https://www.example.com";
+        const method = "POST";
+        const headers = "-H 'Content-Type: application/json'";
+        const data = '{"name": "John"}';
+        const proxy = "https://ProxyUser:ProxyPassword@ProxyHost:8888";
+        const curlBuilder = new CurlBuilder({ url, method, headers, data, proxy });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X POST ${headers} --data '${data}' --proxy '${proxy}' ${url}`);
+    });
+
+    it('should not include proxy option when proxy is not provided', () => {
+        const url = "https://www.example.com";
+        const curlBuilder = new CurlBuilder({ url });
+
+        const result = curlBuilder.build();
+
+        expect(result).not.toContain("--proxy");
+        expect(result).toBe(`curl -X GET ${url}`);
+    });
+
+    it('should handle multiple options including proxy correctly', () => {
+        const url = "https://www.example.com";
+        const method = "GET";
+        const headers = "-H 'Accept: application/json'";
+        const proxy = "socks5://ProxyUser:ProxyPassword@ProxyHost:8888";
+        const verbose = true;
+        const curlBuilder = new CurlBuilder({ url, method, headers, proxy, verbose });
+
+        const result = curlBuilder.build();
+
+        expect(result).toBe(`curl -X GET ${headers} --verbose --proxy '${proxy}' ${url}`);
+    });
 });
