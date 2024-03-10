@@ -37,6 +37,9 @@ const verboseCommand = new VerboseCommand();
 const CookieCommand = require("../commands/cookie-command/index.js");
 const cookieCommand = new CookieCommand();
 
+const UserCommand = require("../commands/user-command/index.js");
+const userCommand = new UserCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
@@ -46,9 +49,10 @@ const confirmationData = confirmation({name: dataCommand.name, message: "Do you 
 const confirmationOutput = confirmation({name: outputCommand.name, message: "Do you want to add an output file?", valueDefault: false});
 const confirmationUserAgent = confirmation({name: userAgentCommand.name, message: "Do you want to customize the userAgent?", valueDefault: false});
 const confirmationCookie = confirmation({name: cookieCommand.name, message: "Do you want to add cookies?", valueDefault: false});
+const confirmationUser = confirmation({name: userCommand.name, message: "Do you want to add user and password (basic-auth) ?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -131,9 +135,17 @@ async function menuBuild() {
             message: cookieCommand.message,
             validate: (value) => {return cookieCommand.validate({cookieString: value}); },
             when: answers => answers[`${confirmationCookie.prefixVal}${cookieCommand.name}`]
-        }
+        },
+        confirmationUser,
+        {
+            type: "input",
+            name: userCommand.name,
+            message: userCommand.message,
+            validate: (value) => userCommand.validate({ authString: value }),
+            when: answers => answers[`${confirmationUser.prefixVal}${userCommand.name}`]
+        },
     ]);
-    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie});
+    const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user});
     const curlCommand = curlBuilder.build();
 
     const curlLauncher = new CurlLauncher({curlCommand, debug: verbose});
