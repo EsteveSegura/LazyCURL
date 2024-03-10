@@ -79,7 +79,7 @@ class CurlBuilder {
         if(!value) {
             return "";
         }
-        
+
         const isCommaSeparated = value.includes(",");
 
         if(!isCommaSeparated) { 
