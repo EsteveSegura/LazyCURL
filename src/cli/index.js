@@ -43,7 +43,7 @@ const userCommand = new UserCommand();
 const ProxyCommand = require("../commands/proxy-command");
 const proxyCommand = new ProxyCommand();
 
-const PrintTheCommandCommand = require('../commands/print-the-command-command');
+const PrintTheCommandCommand = require("../commands/print-the-command-command");
 const printTheCommandCommand = new PrintTheCommandCommand();
 
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
