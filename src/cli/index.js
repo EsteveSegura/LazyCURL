@@ -43,6 +43,9 @@ const userCommand = new UserCommand();
 const ProxyCommand = require("../commands/proxy-command");
 const proxyCommand = new ProxyCommand();
 
+const PrintTheCommandCommand = require('../commands/print-the-command-command');
+const printTheCommandCommand = new PrintTheCommandCommand();
+
 const CurlBuilder = require("../infrastructure/services/curl/curl-builder.js");
 const CurlLauncher = require("../infrastructure/services/curl/curl-launcher.js");
 
@@ -56,7 +59,7 @@ const confirmationUser = confirmation({name: userCommand.name, message: "Do you 
 const confirmationProxy = confirmation({name: proxyCommand.name, message: "Do you want to add a proxy?", valueDefault: false});
 
 async function menuBuild() {
-    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user } = await inquirer.prompt([
+    const { url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user, printTheCommand } = await inquirer.prompt([
         {
             type: "input",
             name: urlCommand.name,
@@ -156,9 +159,22 @@ async function menuBuild() {
             validate: (value) => proxyCommand.validate({ proxyString: value }),
             when: answers => answers[`${confirmationProxy.prefixVal}${proxyCommand.name}`]
         },
+        {
+            type: "list",
+            name: printTheCommandCommand.name,
+            message: printTheCommandCommand.message,
+            choices: printTheCommandCommand.choices
+        }
     ]);
     const curlBuilder = new CurlBuilder({url, method, headers, includeHeaders, data, askContentType, output, userAgent, location, insecure, verbose, cookie, user});
     const curlCommand = curlBuilder.build();
+
+    // If the user wants to print the command, then the command is printed and the program ends.
+    // If the user wants to launch the command, then the command is launched.
+    if (printTheCommand === printTheCommandCommand.choices[1]) {
+        console.log(curlCommand);
+        return;
+    }
 
     const curlLauncher = new CurlLauncher({curlCommand, debug: verbose});
     curlLauncher.launch();
